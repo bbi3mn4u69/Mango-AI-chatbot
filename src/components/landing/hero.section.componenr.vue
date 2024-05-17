@@ -1,6 +1,4 @@
 <template>
-
-
   <div class="vw-100 vh-100 d-flex justify-content-center align-items-center">
     <div class="container">
       <div class="w-75 mx-auto">

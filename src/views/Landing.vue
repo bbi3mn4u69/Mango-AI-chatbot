@@ -6,6 +6,7 @@
     <FeedbackSection />
     <FormSection />
     <LastCallSection />
+    <Footer/>
   </div>
 </template>
 
@@ -16,6 +17,7 @@ import IntroductionSection from "@/components/landing/introduction.section.compo
 import FormSection from "@/components/landing/form.section.component.vue";
 import LastCallSection from "@/components/landing/lastcall.section.component.vue";
 import Navbar from "@/components/shared/navbar.shared.component.vue";
+import Footer from "@/components/shared/footer.shared.component.vue"
 export default {
   name: "LandingPage",
   components: {
@@ -25,6 +27,7 @@ export default {
     FormSection,
     LastCallSection,
     Navbar,
+    Footer
   },
 };
 </script>
