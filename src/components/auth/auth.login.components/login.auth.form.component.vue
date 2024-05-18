@@ -24,10 +24,12 @@
         </div>
       </div>
       <!-- button -->
-      <div class="d-flex justify-content-center gap-4 w-full container">
-        <button class="col-6 btn btn-warning w-full">Login</button>
-
-        <button class="col-6 btn btn-primary w-full">Sign up</button>
+      <div
+        class="d-flex justify-content-center gap-4 w-full align-items-center container"
+      >
+        <button class="col-5 btn btn-warning">Login</button>
+        <div>OR</div>
+        <button class="col-5 btn btn-primary">Sign up</button>
       </div>
     </div>
   </div>
