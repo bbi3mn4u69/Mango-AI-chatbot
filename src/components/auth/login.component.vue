@@ -1,16 +1,13 @@
 <template>
-    <LoginForm/>
+  <LoginForm />
 </template>
 
 <script>
-import LoginForm from "./auth.components/login.auth.form.component.vue"
-    export default {
-        component: {
-            LoginForm
-        }
-    }
+import LoginForm from "./auth.components/login.auth.form.component.vue";
+export default {
+  name: "Login",
+  components: {
+    LoginForm,
+  },
+};
 </script>
-
-<style lang="scss" scoped>
-
-</style>
