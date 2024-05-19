@@ -30,7 +30,7 @@
       </div>
       <div>
         Dont have a account?
-        <a href="#" class="text-reset">
+        <a @click="goToSignUpPage" class="text-reset" style="cursor: pointer;">
           <span class="text-warning fw-semibold">Sign up here</span>
         </a>
       </div>
@@ -39,7 +39,18 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
+
 export default {
   name: "form-login",
+  setup() {
+    const router = useRouter();
+    const goToSignUpPage = () => {
+      router.push("/signup");
+    };
+    return {
+      goToSignUpPage
+    };``
+  },
 };
 </script>

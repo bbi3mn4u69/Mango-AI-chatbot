@@ -42,7 +42,7 @@
       </div>
       <div>
         Already have a account?
-        <a href="#" class="text-reset">
+        <a @click="goToSignInPage" class="text-reset" style="cursor: pointer">
           <span class="text-warning fw-semibold">Sign in here</span>
         </a>
       </div>
@@ -51,7 +51,19 @@
 </template>
 
 <script>
-export default {};
+import {useRouter} from "vue-router";
+export default {
+    name: "signup-form",
+    setup() {
+        const router = useRouter();
+        const goToSignInPage = () => {
+            router.push("/login");
+        };
+        return {
+            goToSignInPage
+        }
+    }
+};
 </script>
 
 <style lang="scss" scoped></style>
