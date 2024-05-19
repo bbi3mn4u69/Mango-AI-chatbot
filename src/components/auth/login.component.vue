@@ -1,13 +1,13 @@
 <template>
-   <div class="d-flex flex-column justify-content-center align-items-center vh-100">
-    <div class="fs-1 fw-semibold">
-        Sign in to your account
-    </div>
-    <div class="d-flex justify-content-center align-items-center flex-row container">
-
-      <LoginImage/>
-      <LoginForm/>
-
+  <div
+    class="d-flex flex-column justify-content-center align-items-center vh-100"
+  >
+    
+    <div
+      class="d-flex justify-content-center align-items-center flex-row container"
+    >
+      <LoginImage />
+      <LoginForm />
     </div>
   </div>
 </template>

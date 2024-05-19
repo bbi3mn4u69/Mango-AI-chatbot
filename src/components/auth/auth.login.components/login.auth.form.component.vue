@@ -2,6 +2,7 @@
   <div class="container">
     <div class="d-flex flex-column w-full gap-3">
       <!-- form component -->
+      <div class="fs-2 fw-semibold text-center">Sign in to your account</div>
       <div class="w-full">
         <div class="form-floating mb-3">
           <input
@@ -24,12 +25,14 @@
         </div>
       </div>
       <!-- button -->
-      <div
-        class="d-flex justify-content-center gap-4 w-full align-items-center container"
-      >
-        <button class="col-5 btn btn-warning">Login</button>
-        <div>OR</div>
-        <button class="col-5 btn btn-primary">Sign up</button>
+      <div class="d-flex justify-content-center w-full align-items-center">
+        <button class="col-12 btn btn-warning text-light fw-bold">Login</button>
+      </div>
+      <div>
+        Dont have a account?
+        <a href="#" class="text-reset">
+          <span class="text-warning fw-semibold">Sign up here</span>
+        </a>
       </div>
     </div>
   </div>
