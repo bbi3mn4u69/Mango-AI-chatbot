@@ -4,7 +4,7 @@
   >
     
     <div
-      class="d-flex justify-content-center align-items-center flex-row container"
+      class="d-flex justify-content-center align-items-center flex-row container "
     >
       <LoginImage />
       <LoginForm />
