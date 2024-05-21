@@ -7,7 +7,7 @@
         <div class="form-floating mb-3">
           <input
             type="text"
-            class="form-control border-none"
+            class="form-control border-none input-field"
             id="floatingInput"
             placeholder="Alex Example"
           />
@@ -17,7 +17,7 @@
         <div class="form-floating mb-3">
           <input
             type="email"
-            class="form-control border-none"
+            class="form-control border-none input-field"
             id="floatingInput"
             placeholder="name@example.com"
           />
@@ -27,7 +27,7 @@
         <div class="form-floating">
           <input
             type="password"
-            class="form-control"
+            class="form-control input-field"
             id="floatingPassword"
             placeholder="Password"
           />
@@ -51,19 +51,26 @@
 </template>
 
 <script>
-import {useRouter} from "vue-router";
+import { useRouter } from "vue-router";
+
 export default {
-    name: "signup-form",
-    setup() {
-        const router = useRouter();
-        const goToSignInPage = () => {
-            router.push("/login");
-        };
-        return {
-            goToSignInPage
-        }
-    }
+  name: "signup-form",
+  setup() {
+    const router = useRouter();
+    const goToSignInPage = () => {
+      router.push("/login");
+    };
+    return {
+      goToSignInPage,
+    };
+  },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.input-field:focus {
+  outline: none;
+  box-shadow: none;
+  border: 1px solid #000000;
+}
+</style>
