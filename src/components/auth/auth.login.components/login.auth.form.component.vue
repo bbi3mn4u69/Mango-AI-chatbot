@@ -30,7 +30,7 @@
       </div>
       <div>
         Dont have a account?
-        <a @click="goToSignUpPage" class="text-reset" style="cursor: pointer;">
+        <a @click="goToSignUpPage" class="text-reset" style="cursor: pointer">
           <span class="text-warning fw-semibold">Sign up here</span>
         </a>
       </div>
@@ -38,19 +38,41 @@
   </div>
 </template>
 
-<script>
-import { useRouter } from 'vue-router';
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from "vue-router";
+import { supabase } from '@/lib/supabaseClient';
 
+const router = useRouter();
+let email = ref('');
+let password = ref('');
+
+const Login = async () => {
+  const {data, error} = await supabase.auth.signInWithPassword({
+    email: email.value,
+    password: password.value,
+  })
+  if(error) {
+    console.log(error)
+  }
+  if(data) {
+    console.log(data)
+  }
+
+}
+const getCurrentUser = async () => {
+  const user  = await supabase.auth.getSession()
+  console.log(user)
+}
+
+const goToSignUpPage = () => {
+  router.push("/signup");
+};
+
+</script>
+
+<script>
 export default {
   name: "form-login",
-  setup() {
-    const router = useRouter();
-    const goToSignUpPage = () => {
-      router.push("/signup");
-    };
-    return {
-      goToSignUpPage
-    };``
-  },
 };
 </script>

@@ -10,6 +10,7 @@
             class="form-control border-none input-field"
             id="floatingInput"
             placeholder="Alex Example"
+            v-model="username"
           />
           <label for="floatingInput">Your Name</label>
         </div>
@@ -20,6 +21,7 @@
             class="form-control border-none input-field"
             id="floatingInput"
             placeholder="name@example.com"
+            v-model="email"
           />
           <label for="floatingInput">Email address</label>
         </div>
@@ -30,13 +32,14 @@
             class="form-control input-field"
             id="floatingPassword"
             placeholder="Password"
+            v-model="password"
           />
           <label for="floatingPassword">Password</label>
         </div>
       </div>
       <!-- button -->
       <div class="d-flex justify-content-center w-full align-items-center">
-        <button class="col-12 btn btn-warning text-light fw-bold">
+        <button @click="SignUp" class="col-12 btn btn-warning text-light fw-bold">
           Sign Up
         </button>
       </div>
@@ -50,20 +53,43 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { useRouter } from "vue-router";
+import { ref } from "vue";
+import { supabase } from '@/lib/supabaseClient';
 
+const router = useRouter();
+let username = ref("");
+let email = ref("");
+let password = ref("");
+
+const SignUp = async () => {
+  console.log(username.value, email.value, password.value);
+  const {data, error} = await supabase.auth.signUp({
+    email: email.value,
+    password: password.value,
+    options: {
+      data: {
+        username: username.value,
+      }
+    }
+  })
+  if(data) {
+    console.log(data)
+  }if(error) {
+    console.log(error)
+  }
+};
+
+const goToSignInPage = () => {
+  router.push("/login");
+};
+
+</script>
+
+<script>
 export default {
   name: "signup-form",
-  setup() {
-    const router = useRouter();
-    const goToSignInPage = () => {
-      router.push("/login");
-    };
-    return {
-      goToSignInPage,
-    };
-  },
 };
 </script>
 
