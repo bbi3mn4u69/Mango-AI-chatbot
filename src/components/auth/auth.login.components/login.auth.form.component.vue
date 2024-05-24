@@ -28,6 +28,30 @@
       <div class="d-flex justify-content-center w-full align-items-center">
         <button class="col-12 btn btn-warning text-light fw-bold">Login</button>
       </div>
+      <!-- or -->
+      <div class="d-flex justify-content-center container">
+        <div
+          class="d-flex flex-row justify-content-center w-75 align-items-center gap-3"
+        >
+          <hr class="w-50" />
+          <div style="color: #a3a3a3">OR</div>
+          <hr class="w-50" />
+        </div>
+      </div>
+      <!-- google -->
+
+      <GoogleLogin>
+        <div class="d-flex justify-content-center w-full align-items-center">
+          <button
+            style="color: #a3a3a3"
+            class="p-2 d-flex flex-row justify-content-center gap-2 col-12 btn border align-items-center"
+          >
+            <img style="width: 23px" src="/logo/Google.png" alt="google" />
+            <div>Sign In With Google</div>
+          </button>
+        </div>
+      </GoogleLogin>
+
       <div>
         Dont have a account?
         <a @click="goToSignUpPage" class="text-reset" style="cursor: pointer">
@@ -39,36 +63,34 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { supabase } from '@/lib/supabaseClient';
+import { supabase } from "@/lib/supabaseClient";
 
 const router = useRouter();
-let email = ref('');
-let password = ref('');
+let email = ref("");
+let password = ref("");
 
 const Login = async () => {
-  const {data, error} = await supabase.auth.signInWithPassword({
+  const { data, error } = await supabase.auth.signInWithPassword({
     email: email.value,
     password: password.value,
-  })
-  if(error) {
-    console.log(error)
+  });
+  if (error) {
+    console.log(error);
   }
-  if(data) {
-    console.log(data)
+  if (data) {
+    console.log(data);
   }
-
-}
+};
 const getCurrentUser = async () => {
-  const user  = await supabase.auth.getSession()
-  console.log(user)
-}
+  const user = await supabase.auth.getSession();
+  console.log(user);
+};
 
 const goToSignUpPage = () => {
   router.push("/signup");
 };
-
 </script>
 
 <script>
