@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row g-0 tex-center">
+    <div class="row g-0 text-center">
       <div class="col-6 col-md-2">
         <SideBar />
       </div>

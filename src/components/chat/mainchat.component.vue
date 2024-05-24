@@ -25,18 +25,19 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import SendIcon from "../icon/send.icon.vue";
 import WelcomeChatComponent from "./welcome.chat.component.vue";
+
+
+
+
+</script>
+<script>
 export default {
   name: "main-chat",
-  components: {
-    SendIcon,
-    WelcomeChatComponent,
-  },
 };
 </script>
-
 <style scoped>
 .input-container {
   margin-bottom: 20px;

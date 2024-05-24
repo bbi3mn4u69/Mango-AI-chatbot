@@ -8,11 +8,11 @@
           <input
             type="text"
             class="form-control border-none input-field"
-            id="floatingInput"
+            id="floatingName"
             placeholder="Alex Example"
             v-model="username"
           />
-          <label for="floatingInput">Your Name</label>
+          <label for="floatingName">Your Name</label>
         </div>
 
         <div class="form-floating mb-3">
@@ -39,52 +39,69 @@
       </div>
       <!-- button -->
       <div class="d-flex justify-content-center w-full align-items-center">
-        <button @click="SignUp" class="col-12 btn btn-warning text-light fw-bold">
-          Sign Up
+        <button
+          @click="SignUp"
+          class="col-12 btn btn-warning text-light fw-bold"
+          :disabled="loading"
+        >
+          <template v-if="loading">
+            <div class="lds-ring">
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </template>
+          <template v-else> Sign Up </template>
         </button>
       </div>
       <div>
         Already have a account?
         <a @click="goToSignInPage" class="text-reset" style="cursor: pointer">
-          <span class="text-warning fw-semibold">Sign in here</span>
+          <span class="text-warning fw-semibold">Sign in here </span>
         </a>
       </div>
     </div>
   </div>
+
+  <!-- spinner -->
 </template>
 
 <script setup>
 import { useRouter } from "vue-router";
 import { ref } from "vue";
-import { supabase } from '@/lib/supabaseClient';
+import { supabase } from "@/lib/supabaseClient";
 
 const router = useRouter();
 let username = ref("");
 let email = ref("");
 let password = ref("");
+let loading = ref(false);
 
 const SignUp = async () => {
+  loading.value = true;
   console.log(username.value, email.value, password.value);
-  const {data, error} = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email: email.value,
     password: password.value,
     options: {
       data: {
         username: username.value,
-      }
-    }
-  })
-  if(data) {
-    console.log(data)
-  }if(error) {
-    console.log(error)
+      },
+    },
+  });
+  if (data) {
+    loading.value = false;
+    router.push("/login");
+    console.log(data);
+  }
+  if (error) {
+    console.log(error);
   }
 };
 
 const goToSignInPage = () => {
   router.push("/login");
 };
-
 </script>
 
 <script>
@@ -99,10 +116,49 @@ export default {
   box-shadow: none;
   border: 1px solid #000000;
 }
-//commit 
-// commit commit
 
-
+// spinner
+.lds-ring {
+  /* change color here */
+  color: #ffffff;
+}
+.lds-ring,
+.lds-ring div {
+  box-sizing: border-box;
+}
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  height: 30px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  margin: 3px;
+  border: 4px solid currentColor;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: currentColor transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 </style>
-
-
