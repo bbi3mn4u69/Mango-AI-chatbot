@@ -7,7 +7,7 @@
       <div class="col-sm-8 col-md-10 position-relative">
 
         <MainChat />
-        <div class="position-absolute top-0 m-3 h-auto">
+        <div class="position-absolute top-0 end-0 m-3 h-auto">
           <UserInfor />
         </div>
       </div>
