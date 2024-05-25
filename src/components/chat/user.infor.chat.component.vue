@@ -1,13 +1,14 @@
 <template>
   <div class="dropdown border-none">
     <button
-      class="btn dropdown-toggle d-flex flex-row align-items-center gap-2 border-none"
+      class="btn d-flex flex-row align-items-center gap-2 border-0"
       type="button"
       data-bs-toggle="dropdown"
       aria-expanded="false"
+      style="cursor: pointer"
     >
       <div
-        style="height: 40px; width: 40px; object-fit: cover"
+        style="height: 30px; width: 30px; object-fit: cover"
         class="rounded-circle overflow-hidden d-flex justify-content-center align-items-center"
       >
         <img
@@ -18,30 +19,49 @@
       </div>
     </button>
 
-    <ul class="dropdown-menu rounded-4 border-none">
-      <li class="mx-3 my-1 fw-semibold">Sign in as</li>
-      <li class="mx-3 my-1 text-capitalize fw-semibold">
-        {{ userInfor.getUserInfo.name }}
-      </li>
-      <li class="mx-3 mb-3 text-lowercase text-primary">
-        {{ userInfor.getUserInfo.email }}
-      </li>
-      <li>
+    <div
+      class="dropdown-menu rounded-4 border-0 shadow-sm"
+      style="background: #fffbeb"
+    >
+      <div
+        class="d-flex flex-column justify-content-center align-items-center gap-2 my-2 mx-2"
+      >
+        <!-- email -->
+        <div class="mx-3 my-1 text-black fw-light">
+          {{ userInfor.getUserInfo.email }}
+        </div>
+        <!-- image -->
+        <div
+          style="height: 50px; width: 50px; object-fit: cover"
+          class="rounded-circle overflow-hidden d-flex justify-content-center align-items-center"
+        >
+          <img
+            :src="userInfor.getUserInfo.image"
+            alt="portrait"
+            style="width: 100%; height: 100%; object-fit: cover"
+          />
+        </div>
+        <!-- name -->
+        <div class="mx-3 my-1 text-capitalize fw-light fs-5">
+          Hello, {{ userInfor.getUserInfo.name }}!
+        </div>
+        <!-- sign out btn  -->
         <button
           @click="Logout"
-          class="dropdown-item btn text-light"
+          class="btn btn-danger text-light rounded-4 px-4 fw-semibold"
           href="#"
           style="background-color: #f87171"
         >
           Sign Out
         </button>
-      </li>
-    </ul>
+      </div>
+
+      <li></li>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { decodeCredential } from "vue3-google-login";
 import { useUserInforStore } from "@/stores/userInfor";
 import { googleLogout } from "vue3-google-login";
 import { useRouter } from "vue-router";
