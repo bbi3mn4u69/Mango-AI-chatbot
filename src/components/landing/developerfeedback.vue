@@ -9,14 +9,13 @@
         </div>
         <div class="d-flex align-items-center flex-row gap-3 my-3 ">
           <div
-            style="height: 50px"
-            class="rounded-circle overflow-hidden d-flex w-auto justify-content-center align-items-center"
+            style="height: 50px; width: 65px; object-fit: cover;"
+            class="rounded-circle overflow-hidden d-flex justify-content-center align-items-center"
           >
             <img
               :src="image"
               alt="portrait"
-              class="object-fit-cover"
-              style="width: 100%; height: 100%;"
+              style="width: 100%; height: 100%; object-fit: cover;"
             />
           </div>
           <div class="d-flex flex-column justify-content-start">
