@@ -40,7 +40,7 @@
       </div>
       <!-- google -->
 
-      <GoogleLogin>
+      <GoogleLogin :callback="callback">
         <div class="d-flex justify-content-center w-full align-items-center">
           <button
             style="color: #a3a3a3"
@@ -70,6 +70,10 @@ import { supabase } from "@/lib/supabaseClient";
 const router = useRouter();
 let email = ref("");
 let password = ref("");
+
+const callback = (res) => {
+  console.log("handle response",res);
+};
 
 const Login = async () => {
   const { data, error } = await supabase.auth.signInWithPassword({
