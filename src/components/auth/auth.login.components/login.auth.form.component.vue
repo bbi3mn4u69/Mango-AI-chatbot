@@ -40,17 +40,9 @@
       </div>
       <!-- google -->
 
-      <GoogleLogin :callback="callback">
-        <div class="d-flex justify-content-center w-full align-items-center">
-          <button
-            style="color: #a3a3a3"
-            class="p-2 d-flex flex-row justify-content-center gap-2 col-12 btn border align-items-center"
-          >
-            <img style="width: 23px" src="/logo/Google.png" alt="google" />
-            <div>Sign In With Google</div>
-          </button>
-        </div>
-      </GoogleLogin>
+      <div class="d-flex justify-content-center w-full align-items-center">
+        <GoogleLogin :callback="callback" />
+      </div>
 
       <div>
         Dont have a account?
@@ -66,15 +58,13 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { supabase } from "@/lib/supabaseClient";
+import { useUserInforStore } from "@/stores/userInfor";
+import { decodeCredential } from "vue3-google-login";
 
-const router = useRouter();
+// email and password for credential login
+// function for credential login
 let email = ref("");
 let password = ref("");
-
-const callback = (res) => {
-  console.log("handle response",res);
-};
-
 const Login = async () => {
   const { data, error } = await supabase.auth.signInWithPassword({
     email: email.value,
@@ -87,18 +77,26 @@ const Login = async () => {
     console.log(data);
   }
 };
+
+// callback for google Oauth
+const userInfor = useUserInforStore();
+const callback = (res) => {
+  const userData = decodeCredential(res.credential);
+  userInfor.setUserInfo(userData.name, userData.email, userData.picture);
+  if(userData.email_verified !== null) {
+    router.push("/chat");
+  }
+};
+
+// get current user from supabase
 const getCurrentUser = async () => {
   const user = await supabase.auth.getSession();
   console.log(user);
 };
 
+// router to push to Signup page
+const router = useRouter();
 const goToSignUpPage = () => {
   router.push("/signup");
-};
-</script>
-
-<script>
-export default {
-  name: "form-login",
 };
 </script>
