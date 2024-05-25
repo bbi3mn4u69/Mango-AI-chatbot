@@ -4,7 +4,7 @@
     @keypress.enter="sendMessage"
   >
     <!-- Display user inputs -->
-    <div class="mt-3">
+    <div ref="messageDisplay"  class="mt-3 user-input-display">
       <div v-for="(message, index) in messages" :key="index" class="user-message d-flex flex-row gap-4">
       <div
         style="height: 30px; width: 30px; object-fit: cover"
@@ -49,7 +49,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, nextTick } from "vue";
 import SendIcon from "../icon/send.icon.vue";
 import WelcomeChatComponent from "./welcome.chat.component.vue";
 import { useUserInforStore } from "@/stores/userInfor";
@@ -57,12 +57,19 @@ import { useUserInforStore } from "@/stores/userInfor";
 const userInput = ref("");
 const messages = ref([]);
 const userImage = useUserInforStore();
+const messageDisplay = ref(null);
 const sendMessage = () => {
   if (userInput.value.trim() !== "") {
     messages.value.push(userInput.value);
     userInput.value = "";
+    nextTick(() => {
+      if (messageDisplay.value) {
+        messageDisplay.value.scrollTop = messageDisplay.value.scrollHeight;
+      }
+    });
   }
 };
+
 </script>
 
 <style scoped>
@@ -84,5 +91,9 @@ const sendMessage = () => {
   margin: 3px;
   border-radius: 5px;
   margin-bottom: 20px;
+}
+.user-input-display {
+  max-height: 600px; 
+  overflow-y: scroll;
 }
 </style>
