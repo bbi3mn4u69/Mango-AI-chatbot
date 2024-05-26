@@ -7,11 +7,13 @@
       <div class="col-sm-8 col-md-10 position-relative">
 
         <MainChat />
+        
         <div class="position-absolute top-0 end-0 m-3 h-auto">
           <UserInfor />
         </div>
       </div>
     </div>
+    
   </div>
 </template>
 
@@ -19,4 +21,5 @@
 import SideBar from "../components/chat/sidebar.chat.component.vue";
 import MainChat from "../components/chat/mainchat.component.vue";
 import UserInfor from "../components/chat/user.infor.chat.component.vue";
+import Credit from "../components/shared/credit.shared.component.vue";
 </script>
