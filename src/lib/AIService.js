@@ -59,6 +59,18 @@ async function run(prompt) {
           },
         ],
       },
+      {
+        role: "user",
+        parts: [
+          {text: "please introduce abit about you\n"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "My name is Mango AI, built by Bill Pham. I'm a large language model, which means I can communicate and generate human-like text in response to a wide range of prompts and questions. For example, I can provide summaries of factual topics or create stories.  \n\nI'm still under development, but I'm learning new things every day! I'm excited to see what I can do in the future.  😊 \n"},
+        ],
+      },
     ],
   });
   try {
@@ -69,6 +81,7 @@ async function run(prompt) {
 
     return response;
   } catch (error) {
+    console.log(error);
     if (error) {
       const response =
         "Sorry I can not help you with that question, its violate our policies, please ask another question!";
