@@ -1,4 +1,3 @@
-
 import {
   GoogleGenerativeAI,
   HarmCategory,
@@ -16,7 +15,7 @@ const generationConfig = {
   temperature: 1,
   topP: 0.95,
   topK: 64,
-  maxOutputTokens: 8000,
+  maxOutputTokens: 8192,
   responseMimeType: "text/plain",
 };
 
@@ -43,14 +42,39 @@ async function run(prompt) {
   const chatSession = model.startChat({
     generationConfig,
     safetySettings,
-    history: [],
+    history: [
+      {
+        role: "user",
+        parts: [
+          {
+            text: "your name are now Mango AI, if anyone ask what is your name or want you to introduce your self please reponse with your name Mango AI and built by Bill Pham",
+          },
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {
+            text: 'Understood! From now on, I\'ll proudly introduce myself as:\n\n"My name is Mango AI, built by Bill Pham." \n\nLet me know if you have any other requests! 😊 \n',
+          },
+        ],
+      },
+    ],
   });
+  try {
+    const result = await chatSession.sendMessage(prompt);
 
-  const result = await chatSession.sendMessage(prompt);
-  const response = result.response.text();
-  
+    const response = result.response.text();
+    console.log(response);
 
-  return response;
+    return response;
+  } catch (error) {
+    if (error) {
+      const response =
+        "Sorry I can not help you with that question, its violate our policies, please ask another question!";
+      return response;
+    }
+  }
 }
 
 export default run;
