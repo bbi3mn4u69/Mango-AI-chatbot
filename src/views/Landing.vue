@@ -6,8 +6,9 @@
     <FeedbackSection />
     <FormSection />
     <LastCallSection />
-    <Credit/>
+    
     <Footer/>
+    <Credit/>
   </div>
 </template>
 

@@ -1,19 +1,11 @@
 <template>
-    <div class="vw-100 h-auto">
-        <login/>
-    </div>
+  <div class="vw-100 h-auto">
+    <login />
+  </div>
 </template>
 
-<script>
-import Login from "@/components/auth/login.component.vue"
-    export default {
-        name: "LoginPage",
-        components: {
-            Login
-        }
-    }
+<script setup>
+import Login from "@/components/auth/login.component.vue";
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

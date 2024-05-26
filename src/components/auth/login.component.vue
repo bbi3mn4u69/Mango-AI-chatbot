@@ -9,17 +9,14 @@
       <LoginImage />
       <LoginForm />
     </div>
+    <Credit/>
   </div>
+  
 </template>
 
-<script>
+<script setup>
 import LoginForm from "./auth.login.components/login.auth.form.component.vue";
 import LoginImage from "./auth.login.components/login.auth.image.component.vue";
-export default {
-  name: "Login",
-  components: {
-    LoginForm,
-    LoginImage,
-  },
-};
+import Credit from "@/components/shared/credit.shared.component.vue"
+
 </script>
