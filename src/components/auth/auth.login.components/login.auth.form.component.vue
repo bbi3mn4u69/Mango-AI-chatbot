@@ -10,6 +10,7 @@
             class="form-control border-none"
             id="floatingInput"
             placeholder="name@example.com"
+            v-model="email"
           />
           <label for="floatingInput">Email address</label>
         </div>
@@ -20,13 +21,19 @@
             class="form-control"
             id="floatingPassword"
             placeholder="Password"
+            v-model="password"
           />
           <label for="floatingPassword">Password</label>
         </div>
       </div>
       <!-- button -->
       <div class="d-flex justify-content-center w-full align-items-center">
-        <button class="col-12 btn btn-warning text-light fw-bold">Login</button>
+        <button
+          @click="Login"
+          class="col-12 btn btn-warning text-light fw-bold"
+        >
+          Login
+        </button>
       </div>
       <!-- or -->
       <div class="d-flex justify-content-center container">
@@ -65,25 +72,39 @@ import { decodeCredential } from "vue3-google-login";
 // function for credential login
 let email = ref("");
 let password = ref("");
+
 const Login = async () => {
   const { data, error } = await supabase.auth.signInWithPassword({
     email: email.value,
     password: password.value,
   });
   if (error) {
+    console.log(email.value, password.value);
     console.log(error);
   }
   if (data) {
     console.log(data);
+    getCurrentUser();
   }
 };
 
 // callback for google Oauth
 const userInfor = useUserInforStore();
-const callback = (res) => {
+const callback = async (res) => {
   const userData = decodeCredential(res.credential);
   userInfor.setUserInfo(userData.name, userData.email, userData.picture);
-  if(userData.email_verified !== null) {
+  if (userData.email_verified !== null) {
+    const { error } = await supabase
+      .from("AuthenticationCustom")
+      .upsert([
+        {
+          authType: "Oauth",
+          userEmail: userData.email,
+          AccessToken: userData.sub,
+        },
+      ]);
+      // error code 23505
+      console.log(error)
     router.push("/chat");
   }
 };
@@ -91,7 +112,25 @@ const callback = (res) => {
 // get current user from supabase
 const getCurrentUser = async () => {
   const user = await supabase.auth.getSession();
-  console.log(user);
+  console.log(user.data.session.access_token);
+  // authRole
+  userInfor.setUserInfo(
+    user.data.session.user.user_metadata.username,
+    user.data.session.user.email,
+    "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
+    "passwordBase"
+  );
+    const { error } = await supabase.from("AuthenticationCustom").upsert([
+      {
+        authType: "passwordBase",
+        userEmail: user.data.session.user.email,
+        AccessToken: user.data.session.access_token
+      },
+    ]);
+    console.log(error);
+  if (user) {
+    router.push("/chat");
+  }
 };
 
 // router to push to Signup page
