@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HelloWorld from "../components/HelloWorld.vue";
 import Landing from "../views/Landing.vue";
 import Chat from "../views/chat.vue";
 import Login from "../views/Login.vue";
@@ -13,9 +12,8 @@ const router = createRouter({
     // User Authorisezation Path
     { path: "/login", name: "loginpage", component: Login },
     { path: "/signup", name: "signuppage", component: SignUp },
-    { path: "/", name: "helloword", component: HelloWorld },
     // Public Path
-    { path: "/landing", name: "landingpage", component: Landing },
+    { path: "/", name: "landingpage", component: Landing },
     // Protected Path
     {
       path: "/chat",
