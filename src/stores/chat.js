@@ -10,6 +10,9 @@ export const useChatStore = defineStore('chatStore', {
     },
     getChats() {
       return this.chats;
+    },
+    resetChats() {
+      this.chats = []; 
     }
   },
   persist: {
@@ -17,7 +20,7 @@ export const useChatStore = defineStore('chatStore', {
     strategies: [
       {
         key: 'chatStore',
-        storage: localStorage, // You can also use sessionStorage or custom storage
+        storage: localStorage,
       }
     ]
   }
