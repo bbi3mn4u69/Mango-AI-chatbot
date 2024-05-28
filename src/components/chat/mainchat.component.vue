@@ -82,6 +82,12 @@ const userImage = useUserInforStore();
 const messageDisplay = ref(null);
 const chatStore = useChatStore();
 let isLoading = ref(false);
+
+
+
+
+
+
 const sendMessage = async () => {
   isLoading.value = true;
   const currentInput = userInput.value; // Store current input in a temporary variable
