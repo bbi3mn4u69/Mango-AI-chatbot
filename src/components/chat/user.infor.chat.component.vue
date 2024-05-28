@@ -65,16 +65,24 @@
 import { useUserInforStore } from "@/stores/userInfor";
 import { googleLogout } from "vue3-google-login";
 import { useRouter } from "vue-router";
+import { useChatStore } from "@/stores/chat";
+import { supabase } from "@/lib/supabaseClient";
+
 const userInfor = useUserInforStore();
+const chatStore = useChatStore();
 const router = useRouter();
 
 // Logout user
-const Logout = () => {
+const Logout = async () => {
   console.log("logout success");
   userInfor.resetUserInfo();
+  chatStore.resetChats();
   router.push("/landing");
   googleLogout();
+  await supabase.auth.signOut();
+
 };
+
 </script>
 
 <style lang="scss" scoped></style>
