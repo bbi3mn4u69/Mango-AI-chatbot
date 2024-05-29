@@ -77,7 +77,7 @@ const Logout = async () => {
   console.log("logout success");
   userInfor.resetUserInfo();
   chatStore.resetChats();
-  router.push("/landing");
+  router.push("/");
   googleLogout();
   await supabase.auth.signOut();
 
