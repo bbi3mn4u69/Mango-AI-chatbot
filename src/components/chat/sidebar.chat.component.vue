@@ -9,6 +9,7 @@
         </div>
 
         <button
+          @click="newChat"
           class="d-flex flex-row gap-1 align-items-center border-0 rounded-3 px-3 py-2"
           style="background: #fffbeb"
         >
@@ -31,8 +32,14 @@
 <script setup>
 import HistoryCard from "./historycard.chat.component.vue";
 import LogoChat from "./logo.chat.component.vue";
-import UserInfor from "./user.infor.chat.component.vue";
+import { useChatStore } from "@/stores/chat";
 import PlusIcon from "../icon/plus.icon.vue";
+
+const chatStore = useChatStore()
+const newChat = () => {
+  chatStore.resetChats()
+}
+
 </script>
 
 <style scoped>
