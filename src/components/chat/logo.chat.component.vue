@@ -17,19 +17,12 @@
   </button>
 </template>
 
-<script>
+<script setup>
 import { useRouter } from "vue-router";
-export default {
-  name: "logo-chat",
-  setup() {
-    const router = useRouter();
-    const goToChatPage = () => {
-      router.push("/landing");
-    };
-    return {
-      goToChatPage,
-    };
-  },
+
+const router = useRouter();
+const goToChatPage = () => {
+  router.push("/");
 };
 </script>
 
