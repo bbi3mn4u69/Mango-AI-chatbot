@@ -11,6 +11,7 @@
             id="floatingInput"
             placeholder="name@example.com"
             v-model="email"
+            required
           />
           <label for="floatingInput">Email address</label>
         </div>
@@ -22,6 +23,7 @@
             id="floatingPassword"
             placeholder="Password"
             v-model="password"
+            required
           />
           <label for="floatingPassword">Password</label>
         </div>
