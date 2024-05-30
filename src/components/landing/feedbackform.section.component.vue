@@ -165,6 +165,10 @@
             </div>
 
             <button type="submit" class="btn btn-warning mt-2">Submit</button>
+            <div class="text-center fw-light fs-6 mt-2">
+              Thanks, I can make the app better base on your
+              feedback 🤗.
+            </div>
           </div>
         </form>
       </div>
