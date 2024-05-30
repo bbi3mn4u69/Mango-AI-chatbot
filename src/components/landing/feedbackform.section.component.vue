@@ -13,7 +13,7 @@
             How is your think of the app?
           </div>
         </div>
-        <form class="w-full">
+        <form @submit.prevent="submitFeedback" class="w-full">
           <div class="d-flex justify-content-center my-4">
             <div class="d-flex justify-content-between w-75">
               <label
@@ -148,12 +148,16 @@
                 type="email"
                 class="form-control"
                 aria-describedby="emailHelp"
+                required
+                v-model="userEmail"
               />
               <input
                 placeholder="Enter your name"
                 type="text"
                 class="form-control"
                 aria-describedby="name"
+                required
+                v-model="userName"
               />
               <textarea
                 placeholder="Your Feedback"
@@ -161,13 +165,33 @@
                 class="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="text"
+                required
+                v-model="userFeedback"
               />
             </div>
 
-            <button type="submit" class="btn btn-warning mt-2">Submit</button>
+            <button @click="submitFeedback" class="btn btn-warning mt-2" :disabled="loading">
+              
+              <template v-if="loading">
+                <div class="lds-ring">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </template>
+              <template v-else-if="tick">
+                <check-icon />
+              </template>
+              <template v-else> Submit </template>
+            </button>
             <div class="text-center fw-light fs-6 mt-2">
-              Thanks, I can make the app better base on your
-              feedback 🤗.
+              Thanks, I can make the app better base on your feedback 🤗.
+            </div>
+            <div
+              v-if="errorMessage"
+              class="text-center text-danger fw-light fs-6 mt-2"
+            >
+              {{ errorMessage }}
             </div>
           </div>
         </form>
@@ -178,19 +202,109 @@
 
 <script setup>
 import { ref } from "vue";
+import { supabase } from "@/lib/supabaseClient";
+import CheckIcon from "@/components/icon/check.icon.vue";
+
 let rating = ref(null);
+let userEmail = ref(null);
+let userName = ref(null);
+let userFeedback = ref(null);
+let errorMessage = ref("");
+let loading = ref(false);
+let tick = ref(false);
+
 const rate = (number) => {
   rating.value = number;
-  console.log(rating.value);
+};
+
+const submitFeedback = async (e) => {
+  loading.value = true;
+  e.preventDefault();
+  if (
+    rating.value !== null &&
+    userEmail.value !== null &&
+    userName.value !== null &&
+    userFeedback.value !== null
+  ) {
+    
+    const { error, status } = await supabase.from("FeebackTable").upsert({
+      rating: rating.value,
+      userEmail: userEmail.value,
+      userName: userName.value,
+      userFeedback: userFeedback.value,
+    });
+    if (error) {
+      console.log(error);
+      errorMessage.value = "Failed to submit feedback, please try again";
+    }
+    if (status === 201) {
+      tick.value = true;
+      setTimeout(() => {
+        tick.value = false;
+      }, 2000);
+      loading.value = false;
+      rating.value = null;
+      userEmail.value = null;
+      userName.value = null;
+      userFeedback.value = null;
+    }
+  } else {
+    loading.value = false;
+    errorMessage.value = "Please provide your rating";
+  }
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .highlight {
   border-color: #ff9900; /* Example color */
   background-color: #fff2e0; /* Example background color */
 }
 .highlight-text {
   color: #ff9900;
+}
+/* spinner */
+.lds-ring {
+  /* change color here */
+  color: #ffffff;
+}
+.lds-ring,
+.lds-ring div {
+  box-sizing: border-box;
+}
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  height: 30px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  margin: 3px;
+  border: 4px solid currentColor;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: currentColor transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>
