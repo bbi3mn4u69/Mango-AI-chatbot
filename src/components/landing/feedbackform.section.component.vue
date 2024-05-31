@@ -1,6 +1,6 @@
 <template>
   <div
-    class="d-flex flex-column justify-content-center align-items-center py-4"
+    class="d-flex flex-column justify-content-center align-items-center py-4" id="feedback"
   >
     <div class="container">
       <div class="w-50 mx-auto">
@@ -146,7 +146,7 @@
               <input
                 placeholder="Enter your email"
                 type="email"
-                class="form-control"
+                class="form-control input-field"
                 aria-describedby="emailHelp"
                 required
                 v-model="userEmail"
@@ -154,7 +154,7 @@
               <input
                 placeholder="Enter your name"
                 type="text"
-                class="form-control"
+                class="form-control input-field"
                 aria-describedby="name"
                 required
                 v-model="userName"
@@ -162,7 +162,7 @@
               <textarea
                 placeholder="Your Feedback"
                 type="text"
-                class="form-control"
+                class="form-control input-field"
                 id="exampleInputEmail1"
                 aria-describedby="text"
                 required
@@ -204,7 +204,8 @@
 import { ref } from "vue";
 import { supabase } from "@/lib/supabaseClient";
 import CheckIcon from "@/components/icon/check.icon.vue";
-
+import FeedbackSection from "@/components/landing/feedback.section.component.vue";
+const emit = defineEmits(['feedback-submitted']);
 let rating = ref(null);
 let userEmail = ref(null);
 let userName = ref(null);
@@ -238,6 +239,7 @@ const submitFeedback = async (e) => {
       errorMessage.value = "Failed to submit feedback, please try again";
     }
     if (status === 201) {
+      emit('feedback-submitted');
       tick.value = true;
       setTimeout(() => {
         tick.value = false;
@@ -256,6 +258,14 @@ const submitFeedback = async (e) => {
 </script>
 
 <style lang="scss" scoped>
+
+
+.input-field:focus {
+  outline: none;
+  box-shadow: none;
+  border: 1px solid #000000;
+}
+
 .highlight {
   border-color: #ff9900; /* Example color */
   background-color: #fff2e0; /* Example background color */
