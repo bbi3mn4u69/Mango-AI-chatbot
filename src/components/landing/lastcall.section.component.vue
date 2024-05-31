@@ -9,14 +9,19 @@
       things for a spin.
     </div>
     <!-- button -->
-    <button class="btn btn-warning">Get Started</button>
+    <button class="btn btn-warning" @click="PushGetStarted">Get Started</button>
 
     <!-- end of landing page -->
   </div>
 </template>
 
-<script>
-export default {
-    name: "last-call-section"
+<script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
+
+const PushGetStarted = () => {
+  router.push('/chat');
 }
+
 </script>

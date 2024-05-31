@@ -8,31 +8,58 @@
   <div class="w-75 mx-auto">
     <nav class="navbar navbar-expand-lg bg-transparent">
       <div class="container-fluid">
-      <div class="d-flex justify-content-between align-items-center w-100">
-        <div>
-            <img src="/logo/logo.png" style="width: 73px;" alt="logo">
-            <a class="navbar-brand fs-1 custom-font text-warning" href="#">mangoAI</a>    
-        </div>
-        <div class="d-flex flex-row gap-5 fw-semibold fs-5">
-            <a class="nav-link " href="#">Introduction</a>
-            <a class="nav-link" href="#">Feedback</a>
-            <a class="nav-link" href="#">About</a>
-        </div>
-        <div>
-            <button type="button" class="btn btn-outline-warning">
-                <a class="nav-link fw-semibold  fs-6" href="#">Let's chat</a>
+        <div class="d-flex justify-content-between align-items-center w-100">
+          <div>
+            <img src="/logo/logo.png" style="width: 73px" alt="logo" />
+            <a class="navbar-brand fs-1 custom-font text-warning" href="#"
+              >mangoAI</a
+            >
+          </div>
+          <div class="d-flex flex-row gap-5 fw-semibold fs-5">
+            <button class="nav-link" @click="scrollIntoIntroduction">
+              Introduction
             </button>
-            
+            <button class="nav-link" @click="scrollIntoFeedback">
+              Feedback
+            </button>
+          </div>
+          <div>
+            <button
+              type="button"
+              class="btn btn-outline-warning"
+              @click="PushLogin"
+            >
+              <a class="nav-link fw-semibold fs-6">Let's chat</a>
+            </button>
+          </div>
         </div>
-      </div>
       </div>
     </nav>
   </div>
 </template>
 
-<script>
-export default {
-  name: "nav-bar",
+<script setup>
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const PushLogin = () => {
+  router.push("/chat");
+};
+
+const scrollIntoIntroduction = () => {
+  const introSection = document.querySelector("#introduction");
+  console.log("running upp");
+  if (introSection) {
+    console.log("running here");
+    introSection.scrollIntoView({ behavior: "smooth" });
+  }
+};
+const scrollIntoFeedback = () => {
+  const feedbackSection = document.querySelector("#feedback");
+  if (feedbackSection) {
+    feedbackSection.scrollIntoView({ behavior: "smooth" });
+  }
 };
 </script>
 
