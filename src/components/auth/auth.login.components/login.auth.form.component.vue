@@ -69,7 +69,6 @@ import { useRouter } from "vue-router";
 import { supabase } from "@/lib/supabaseClient";
 import { useUserInforStore } from "@/stores/userInfor";
 import { decodeCredential } from "vue3-google-login";
-
 // email and password for credential login
 // function for credential login
 let email = ref("");
