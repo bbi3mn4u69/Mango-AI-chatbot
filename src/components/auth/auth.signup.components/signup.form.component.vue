@@ -3,7 +3,7 @@
     <div class="d-flex flex-column w-full gap-3">
       <!-- form component -->
       <div class="fs-2 fw-semibold text-center">Sign up to your account</div>
-      <div class="w-full">
+      <form class="w-full">
         <div class="form-floating mb-3">
           <input
             type="text"
@@ -11,6 +11,7 @@
             id="floatingName"
             placeholder="Alex Example"
             v-model="username"
+            required
           />
           <label for="floatingName">Your Name</label>
         </div>
@@ -22,6 +23,7 @@
             id="floatingInput"
             placeholder="name@example.com"
             v-model="email"
+            required
           />
           <label for="floatingInput">Email address</label>
         </div>
@@ -33,10 +35,11 @@
             id="floatingPassword"
             placeholder="Password"
             v-model="password"
+            required
           />
           <label for="floatingPassword">Password</label>
         </div>
-      </div>
+      </form>
       <!-- button -->
       <div class="d-flex justify-content-center w-full align-items-center">
         <button
