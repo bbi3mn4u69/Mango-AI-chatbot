@@ -1,36 +1,30 @@
 <template>
   <div
-    class="d-flex flex-column h-100 w-75 mx-auto"
+    class="d-flex flex-column vh-100 w-75 mx-auto"
     @keypress.enter="sendMessage"
   >
     <!-- Display user inputs -->
-    <div ref="messageDisplay" class="mt-3 user-input-display">
+    <div ref="messageDisplay" class="mt-3 user-input-display flex-grow-1 overflow-auto">
       <div
         v-for="(chat, index) in chatStore.chats"
         :key="index"
         class="user-message d-flex flex-row gap-4 justify-content-between"
       >
-        <div
-          style="height: 45px; width: 45px; object-fit: cover"
-          class="rounded-circle overflow-hidden border d-flex justify-content-center align-items-center"
-        >
+        <div class="chat-image rounded-circle overflow-hidden border d-flex justify-content-center align-items-center">
           <img
             :src="chat.image"
             alt="portrait"
-            style="width: 100%; height: 100%; object-fit: cover"
+            class="chat-img"
           />
         </div>
         <div class="container" v-html="chat.message"></div>
       </div>
       <div v-if="isLoading === true" class="user-message d-flex flex-row gap-4">
-        <div
-          style="height: 45px; width: 45px; object-fit: cover"
-          class="rounded-circle overflow-hidden d-flex justify-content-center align-items-center border"
-        >
+        <div class="chat-image rounded-circle overflow-hidden d-flex justify-content-center align-items-center border">
           <img
             src="/logo/logo.png"
             alt="portrait"
-            style="width: 100%; height: 100%; object-fit: cover"
+            class="chat-img"
           />
         </div>
         <div class="loader mx-2"></div>
@@ -62,10 +56,7 @@
         </div>
       </div>
     </div>
-
-    <Credit />  
   </div>
-  
 </template>
 
 <script setup>
@@ -75,18 +66,12 @@ import WelcomeChatComponent from "./welcome.chat.component.vue";
 import { useUserInforStore } from "@/stores/userInfor";
 import run from "@/lib/AIService";
 import { useChatStore } from "@/stores/chat";
-import Credit from "@/components/shared/credit.shared.component.vue";
 
 const userInput = ref("");
 const userImage = useUserInforStore();
 const messageDisplay = ref(null);
 const chatStore = useChatStore();
 let isLoading = ref(false);
-
-
-
-
-
 
 const sendMessage = async () => {
   isLoading.value = true;
@@ -173,8 +158,35 @@ const sendMessage = async () => {
 }
 
 .user-input-display {
-  max-height: 650px;
-  overflow-y: scroll;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+/* Chat image styling */
+.chat-image {
+  height: 45px;
+  width: 45px;
+}
+
+.chat-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Media queries for tablet and iPhone sizes */
+@media (max-width: 768px) {
+  .chat-image {
+    height: 35px; /* Adjust for tablets */
+    width: 40px; /* Adjust for tablets */
+  }
+}
+
+@media (max-width: 576px) {
+  .chat-image {
+    height: 30px; /* Adjust for iPhones */
+    width: 35px; /* Adjust for iPhones */
+  }
 }
 
 .loader {
