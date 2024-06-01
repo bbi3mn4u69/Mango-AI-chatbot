@@ -1,12 +1,13 @@
 <template>
   <div
-    class="d-flex flex-column justify-content-center align-items-center py-4" id="feedback"
+    class="d-flex flex-column justify-content-center align-items-center py-4"
+    id="feedback"
   >
     <div class="container">
       <div class="w-50 mx-auto">
         <!-- next section -->
         <div class="d-flex flex-column gap-2 justify-content-center pb-4 my-2">
-          <div class="text-center fs-2 fw-bold">
+          <div class="text-center fs-2 fw-bold text-mobile text-tablet">
             Give Us Abit About Your Thought
           </div>
           <div class="text-center fw-light fs-5">
@@ -14,11 +15,13 @@
           </div>
         </div>
         <form @submit.prevent="submitFeedback" class="w-full">
-          <div class="d-flex justify-content-center my-4">
-            <div class="d-flex justify-content-between w-75">
+          <div class="d-flex justify-content-center my-4 wrap-all">
+            <div
+              class="d-flex tablet-justify-content-center justify-content-between w-75 align-items-center"
+            >
               <label
                 @click="rating = 1"
-                class="text-center"
+                class="text-center rating-label"
                 style="cursor: pointer"
               >
                 <input
@@ -30,7 +33,7 @@
                 />
                 <div
                   :class="{
-                    'fs-2 px-3 py-2 border rounded-circle': true,
+                    'fs-2 px-3 py-2 border rounded-circle rating-icon': true,
                     'highlight border-warning': rating === 1,
                   }"
                 >
@@ -42,7 +45,7 @@
               </label>
               <label
                 @click="rate(2)"
-                class="text-center"
+                class="text-center rating-label"
                 style="cursor: pointer"
               >
                 <input
@@ -54,7 +57,7 @@
                 />
                 <div
                   :class="{
-                    'fs-2 px-3 py-2 border rounded-circle': true,
+                    'fs-2 px-3 py-2 border rounded-circle rating-icon': true,
                     'highlight border-warning': rating === 2,
                   }"
                 >
@@ -66,7 +69,7 @@
               </label>
               <label
                 @click="rate(3)"
-                class="text-center"
+                class="text-center rating-label"
                 style="cursor: pointer"
               >
                 <input
@@ -78,7 +81,7 @@
                 />
                 <div
                   :class="{
-                    'fs-2 px-3 py-2 border rounded-circle': true,
+                    'fs-2 px-3 py-2 border rounded-circle rating-icon': true,
                     'highlight border-warning': rating === 3,
                   }"
                 >
@@ -90,7 +93,7 @@
               </label>
               <label
                 @click="rate(4)"
-                class="text-center"
+                class="text-center rating-label"
                 style="cursor: pointer"
               >
                 <input
@@ -102,7 +105,7 @@
                 />
                 <div
                   :class="{
-                    'fs-2 px-3 py-2 border rounded-circle': true,
+                    'fs-2 px-3 py-2 border rounded-circle rating-icon': true,
                     'highlight border-warning': rating === 4,
                   }"
                 >
@@ -114,7 +117,7 @@
               </label>
               <label
                 @click="rate(5)"
-                class="text-center"
+                class="text-center rating-label"
                 style="cursor: pointer"
               >
                 <input
@@ -126,7 +129,7 @@
                 />
                 <div
                   :class="{
-                    'fs-2 px-3 py-2 border rounded-circle': true,
+                    'fs-2 px-3 py-2 border rounded-circle rating-icon': true,
                     'highlight border-warning': rating === 5,
                   }"
                 >
@@ -170,8 +173,11 @@
               />
             </div>
 
-            <button @click="submitFeedback" class="btn btn-warning mt-2" :disabled="loading">
-              
+            <button
+              @click="submitFeedback"
+              class="btn btn-warning mt-2"
+              :disabled="loading"
+            >
               <template v-if="loading">
                 <div class="lds-ring">
                   <div></div>
@@ -205,7 +211,7 @@ import { ref } from "vue";
 import { supabase } from "@/lib/supabaseClient";
 import CheckIcon from "@/components/icon/check.icon.vue";
 import FeedbackSection from "@/components/landing/feedback.section.component.vue";
-const emit = defineEmits(['feedback-submitted']);
+const emit = defineEmits(["feedback-submitted"]);
 let rating = ref(null);
 let userEmail = ref(null);
 let userName = ref(null);
@@ -227,7 +233,6 @@ const submitFeedback = async (e) => {
     userName.value !== null &&
     userFeedback.value !== null
   ) {
-    
     const { error, status } = await supabase.from("FeebackTable").upsert({
       rating: rating.value,
       userEmail: userEmail.value,
@@ -239,7 +244,7 @@ const submitFeedback = async (e) => {
       errorMessage.value = "Failed to submit feedback, please try again";
     }
     if (status === 201) {
-      emit('feedback-submitted');
+      emit("feedback-submitted");
       tick.value = true;
       setTimeout(() => {
         tick.value = false;
@@ -258,8 +263,6 @@ const submitFeedback = async (e) => {
 </script>
 
 <style lang="scss" scoped>
-
-
 .input-field:focus {
   outline: none;
   box-shadow: none;
@@ -315,6 +318,38 @@ const submitFeedback = async (e) => {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 769px) {
+  /* Adjustments for tablets and below */
+  .rating-label {
+    transform: scale(
+      0.85
+    ); /* Scale down the labels slightly less to avoid right deviation */
+  }
+  .rating-icon {
+    font-size: 1.6rem; /* Smaller icons */
+  }
+  .justify-content-between.tablet-justify-content-center {
+    justify-content: center; /* Centering items on tablet */
+  }
+  .align-items-center {
+    align-items: center;
+  }
+}
+@media (max-width: 425px) {
+  /* Adjustments for mobile */
+  .rating-label {
+    transform: scale(0.8); /* Scale down the labels even more */
+  }
+  .rating-icon {
+    font-size: 1.4rem; /* Even smaller icons */
+  }
+  .d-flex.wrap-all {
+    /* Ensure labels stay in one row */
+    flex-wrap: nowrap;
+    overflow-x: auto;
   }
 }
 </style>
