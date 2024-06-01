@@ -33,7 +33,7 @@
             </button>
           </div>
           <div
-            class="d-flex flex-column justify-content-center align-items-center"
+            class="d-flex flex-column justify-content-center align-items-center d-none d-md-block"
           >
             <img src="/AI/1.png" alt="AI" class="w-75" />
           </div>
@@ -102,8 +102,6 @@ export default {
 </script>
 
 <style scoped>
-
-
 .ticker-container {
   width: 75%;
   overflow: hidden;
@@ -114,14 +112,29 @@ export default {
 
 .ticker {
   display: flex;
-  width: calc(100%); /* Enough width to hold all logos twice */
+  width: calc(200%); /* Enough width to hold all logos twice */
   animation: ticker 20s linear infinite;
 }
 
 .logo {
   width: 100px; /* Adjust based on your logo size */
   height: auto;
-  margin-right: 100px; /* Space between logos */
+  margin-right: 50px; /* Space between logos */
+}
+
+@media (max-width: 768px) {
+  .logo {
+    width: 75px; /* Smaller logos on small devices */
+    margin-right: 30px;
+    margin-bottom: 30px; /* Less space between logos */
+  }
+}
+
+@media (max-width: 576px) {
+  .logo {
+    width: 50px; /* Even smaller logos on extra small devices */
+    margin-right: 20px; /* Even less space between logos */
+  }
 }
 
 @keyframes ticker {
