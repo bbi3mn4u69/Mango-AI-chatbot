@@ -47,6 +47,13 @@
         </div>
         <!-- sign out btn  -->
         <button
+          @click="newChat"
+          class="btn btn-outline-info d-block d-lg-none"
+          href="#"
+        >
+          New Chat
+        </button>
+        <button
           @click="Logout"
           class="btn btn-danger text-light rounded-4 px-4 fw-semibold"
           href="#"
@@ -68,8 +75,16 @@ import { useRouter } from "vue-router";
 import { useChatStore } from "@/stores/chat";
 import { supabase } from "@/lib/supabaseClient";
 
+
+
 const userInfor = useUserInforStore();
 const chatStore = useChatStore();
+
+
+const newChat = () => {
+  chatStore.resetChats()
+}
+
 const router = useRouter();
 
 // Logout user
