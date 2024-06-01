@@ -1,22 +1,19 @@
 <template>
   <div
-    class="d-flex flex-column justify-content-center align-items-center vh-100"
+    class="d-flex flex-column justify-content-center align-items-center vh-100 container"
   >
-    
     <div
-      class="d-flex justify-content-center align-items-center flex-row container "
+      class="d-flex justify-content-center align-items-center flex-row container"
     >
       <LoginImage />
       <LoginForm />
     </div>
-    <Credit/>
+    <Credit />
   </div>
-  
 </template>
 
 <script setup>
 import LoginForm from "./auth.login.components/login.auth.form.component.vue";
 import LoginImage from "./auth.login.components/login.auth.image.component.vue";
-import Credit from "@/components/shared/credit.shared.component.vue"
-
+import Credit from "@/components/shared/credit.shared.component.vue";
 </script>
