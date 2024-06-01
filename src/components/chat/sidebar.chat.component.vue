@@ -1,5 +1,5 @@
 <template>
-  <div class="vh-100 gradient-background">
+  <div class="vh-100 gradient-background d-none d-md-block ">
     <div class="container">
       <div
         class="d-flex flex-column gap-2 justify-content-center align-items-center"
@@ -16,21 +16,12 @@
           <PlusIcon />
           <span>New Chat</span>
         </button>
-
-        <div class="d-flex flex-column gap-1 align-items-start ">
-          <div>Recent:</div>
-          <div>
-            <HistoryCard />
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import HistoryCard from "./historycard.chat.component.vue";
 import LogoChat from "./logo.chat.component.vue";
 import { useChatStore } from "@/stores/chat";
 import PlusIcon from "../icon/plus.icon.vue";
