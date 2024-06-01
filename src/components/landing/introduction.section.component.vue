@@ -39,41 +39,12 @@
             <!--  -->
             <div class="mt-4 w-100">
               <div
-                class="d-flex flex-row justify-content-between align-items-center"
+                class="d-flex flex-row justify-content-center align-items-center"
               >
-                <div class="fw-light fs-5 text-start my-2 card rounded">
-                  <ul class="list-unstyled card-body">
-                    <li>
-                      Build your
-                      <span class="fw-semibold text-warning">community</span>
-                    </li>
-                    <li>
-                      Strengthen your
-                      <span class="fw-semibold text-warning">interactions</span>
-                    </li>
-                    <li>
-                      Expand as your
-                      <span class="fw-semibold text-warning">needs</span>
-                    </li>
-                    <li>
-                      Discover a
-                      <span class="fw-semibold text-warning"
-                        >smarter way to connect</span
-                      >
-                    </li>
-                    <li>
-                      Only with
-                      <span class="fw-semibold text-warning"
-                        >our chat solution</span
-                      >
-                    </li>
-                  </ul>
-                </div>
-                <ArrowIcon />
                 <img
-                  src="/picture/appinterface.png"
+                  src="/picture/ask.png"
                   alt="chat-app"
-                  class="w-50 rounded"
+                  class="w-75 rounded"
                 />
               </div>
             </div>
