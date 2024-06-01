@@ -5,7 +5,7 @@
     href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap"
     rel="stylesheet"
   />
-  <div class="container">
+  <div class="container d-none d-md-block">
     <div class="d-flex justify-content-center align-items-center flex-column w-auto">
     <img src="/logo/logo.png" class="w-75" alt="logo image" />
 
