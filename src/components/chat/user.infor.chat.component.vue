@@ -90,10 +90,12 @@ const router = useRouter();
 // Logout user
 const Logout = async () => {
   console.log("logout success");
-  userInfor.resetUserInfo();
   chatStore.resetChats();
   router.push("/");
   googleLogout();
+  const {error} = await supabase.from("AuthenticationCustom").delete().eq("userEmail", userInfor.user.email);
+  console.log(userInfor.user.email)
+  userInfor.resetUserInfo();
   await supabase.auth.signOut();
 
 };

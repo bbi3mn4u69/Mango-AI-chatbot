@@ -15,9 +15,9 @@
           </div>
         </div>
         <form @submit.prevent="submitFeedback" class="w-full">
-          <div class="d-flex justify-content-center my-4 wrap-all">
+          <div class="d-flex justify-content-center wrap-all ">
             <div
-              class="d-flex tablet-justify-content-center justify-content-between w-75 align-items-center"
+              class="d-flex tablet-justify-content-center justify-content-between  align-items-center"
             >
               <label
                 @click="rating = 1"
@@ -332,7 +332,7 @@ const submitFeedback = async (e) => {
     font-size: 1.6rem; /* Smaller icons */
   }
   .justify-content-between.tablet-justify-content-center {
-    justify-content: center; /* Centering items on tablet */
+    justify-content: space-between; /* Centering items on tablet */
   }
   .align-items-center {
     align-items: center;
