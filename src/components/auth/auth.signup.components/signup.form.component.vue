@@ -1,9 +1,9 @@
 <template>
-  <div class="container">
+  <form @submit.prevent="SignUp" class="container">
     <div class="d-flex flex-column w-full gap-3">
       <!-- form component -->
       <div class="fs-2 fw-semibold text-center">Sign up to your account</div>
-      <form class="w-full">
+      <div class="w-full">
         <div class="form-floating mb-3">
           <input
             type="text"
@@ -39,11 +39,12 @@
           />
           <label for="floatingPassword">Password</label>
         </div>
-      </form>
+      </div>
       <!-- button -->
       <div class="d-flex justify-content-center w-full align-items-center">
         <button
           @click="SignUp"
+          type="submit"
           class="col-12 btn btn-warning text-light fw-bold"
           :disabled="loading"
         >
@@ -64,7 +65,7 @@
         </a>
       </div>
     </div>
-  </div>
+  </form>
 
   <!-- spinner -->
 </template>
@@ -80,25 +81,38 @@ let email = ref("");
 let password = ref("");
 let loading = ref(false);
 
-const SignUp = async () => {
-  loading.value = true;
-  console.log(username.value, email.value, password.value);
-  const { data, error } = await supabase.auth.signUp({
-    email: email.value,
-    password: password.value,
-    options: {
-      data: {
-        username: username.value,
-      },
-    },
-  });
-  if (data) {
-    loading.value = false;
-    router.push("/login");
-    console.log(data);
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email regex pattern
+
+const SignUp = async (e) => {
+  e.preventDefault();
+  if (!emailRegex.test(email.value)) {
+    alert("Please enter a valid email address.");
+    return;
   }
-  if (error) {
-    console.log(error);
+  loading.value = true;
+  if (username.value && email.value && password.value) {
+    const { data, error } = await supabase.auth.signUp({
+      email: email.value,
+      password: password.value,
+      options: {
+        data: {
+          username: username.value,
+        },
+      },
+    });
+    if (data) {
+      loading.value = false;
+      router.push("/login");
+      console.log(data);
+    }
+    if (error) {
+      alert(`Signup failed: ${error.message}`);
+      loading.value = false;
+      console.log(error);
+    }
+  } else {
+    alert("Please fill all the fields");
+    loading.value = false;
   }
 };
 
