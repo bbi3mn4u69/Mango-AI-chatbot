@@ -8,11 +8,11 @@
 
   <button
     @click="goToChatPage"
-    class="d-flex flex-row justify-content-center align-items-center bg-transparent border-0"
+    class="d-flex flex-row justify-content-center align-items-center bg-transparent border-0 responsive-button"
   >
-    <img src="/logo/logo.png" style="width: 73px" alt="logo" />
+    <img src="/logo/logo.png" class="logo" alt="logo" />
     <div>
-      <div class="navbar-brand fs-1 custom-font text-white">mangoAI</div>
+      <div class="navbar-brand custom-font text-white logo-text">mangoAI</div>
     </div>
   </button>
 </template>
@@ -31,5 +31,37 @@ const goToChatPage = () => {
   font-family: "Reenie Beanie", cursive;
   font-weight: 900;
   font-style: normal;
+}
+
+.responsive-button {
+  padding: 0;
+}
+
+.logo {
+  width: 73px;
+}
+
+.logo-text {
+  font-size: 2rem; /* Adjust as needed for desktop */
+}
+
+@media (max-width: 768px) {
+  .logo {
+    width: 50px; /* Adjust as needed for tablets */
+  }
+
+  .logo-text {
+    font-size: 1.5rem; /* Adjust as needed for tablets */
+  }
+}
+
+@media (max-width: 576px) {
+  .logo {
+    width: 40px; /* Adjust as needed for mobile devices */
+  }
+
+  .logo-text {
+    font-size: 1.2rem; /* Adjust as needed for mobile devices */
+  }
 }
 </style>
