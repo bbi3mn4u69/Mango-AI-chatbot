@@ -5,7 +5,7 @@
     >
       <div class="text-center fw-bold fs-2 my-2">Loved by developers</div>
       <div
-        class="d-flex flex-row w-100 justify-content-between align-items-center"
+        class="d-flex flex-row w-100 justify-content-between align-items-center overflow-hidden overflow-x-auto"
       >
         <DeveloperFeedback
           v-for="item in paginatedFeedbacks"
