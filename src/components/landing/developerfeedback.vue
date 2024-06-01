@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mx-2">
     <div
       class="card bg-transparent border-3 border-warning"
       style="width: 20rem; height: 21rem"
