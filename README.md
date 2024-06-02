@@ -1,6 +1,7 @@
 # mango-ai
 
 This template should help get you started developing with Vue 3 in Vite.
+This repo belong to Pham Nguyen Quang Huy @ Swinburne University of Technology, any attempt to use or reuse the code with out permission is prohibited
 
 ## Recommended IDE Setup
 
