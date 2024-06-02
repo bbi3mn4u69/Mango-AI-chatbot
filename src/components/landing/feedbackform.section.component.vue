@@ -257,7 +257,7 @@ const submitFeedback = async (e) => {
     }
   } else {
     loading.value = false;
-    errorMessage.value = "Please provide your rating";
+    errorMessage.value = "Please make sure that you fill in all the boxes";
   }
 };
 </script>

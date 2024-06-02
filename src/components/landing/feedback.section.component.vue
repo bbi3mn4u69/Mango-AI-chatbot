@@ -75,6 +75,7 @@ const paginatedFeedbacks = computed(() => {
 const maxPage = computed(() => {
   return Math.ceil(feedbacks.value.length / itemsPerPage.value);
 });
+
 const handlePageClick = (event, pageNumber) => {
   currentPage.value = pageNumber;
 };
