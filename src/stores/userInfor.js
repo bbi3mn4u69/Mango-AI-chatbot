@@ -29,7 +29,7 @@ export const useUserInforStore = defineStore("userInfor", {
     strategies: [
         {
             key: 'userInfor',
-            storage: localStorage,  // You can also use sessionStorage
+            storage: localStorage,  
         }
     ]
 }
