@@ -56,7 +56,6 @@ VITE_GOOGLE_CLIENT_ID = your google client id
 VITE_SUPABASE_URL = your supabase url
 VITE_SUPAKEYS = your supabase anon key
 VITE_GEMINI_API_KEYS = your gemini api key
-
 ```
 
 ___
