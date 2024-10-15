@@ -1,6 +1,6 @@
 # Full Stack Chatbot Web Application with Vuejs, Bootstrap css, Supabase, and Gemini AI API
 
-This repo belong to Pham Nguyen Quang Huy @ Swinburne University of Technology, any attempt to use or reuse the code with out permission is prohibited
+This repo belong to Pham Nguyen Quang Huy @ Swinburne University of Technology
 
 ### Home Page
 ![Trading Platform](homepage1.png "Github logo") 
